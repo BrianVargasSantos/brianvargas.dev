@@ -6,6 +6,7 @@ stack: [TypeScript, Node.js, Svelte 5, Postgres, LLM agents]
 featured: true
 order: 1
 colors: ["#8b5cf6", "#c8ff3d"]
+cover: ../../assets/projects/minerva-list.png
 ---
 
 ## The problem

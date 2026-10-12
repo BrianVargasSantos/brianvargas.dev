@@ -4,10 +4,22 @@ import { SITE } from '../site';
 ---
 <Base title="About">
   <section class="mx-auto grid max-w-6xl gap-14 px-4 py-20 sm:px-6 md:grid-cols-[1fr_1.4fr]">
-    <div>
-      <!-- TODO: replace with your photo: put it in src/assets and use <Image /> from astro:assets -->
-      <div class="aspect-[4/5] rounded-3xl border border-line bg-[radial-gradient(100%_80%_at_100%_0%,var(--color-violet),transparent_60%),radial-gradient(100%_80%_at_0%_100%,var(--color-lime),transparent_60%)] opacity-80"></div>
-    </div>
+    <aside class="md:sticky md:top-24 md:self-start">
+      <!-- To add a photo: put it in src/assets and render it here with <Image /> from astro:assets. -->
+      <div class="relative overflow-hidden rounded-3xl border border-line bg-ink-2 p-8">
+        <div aria-hidden="true" class="absolute -right-20 -top-20 size-64 rounded-full bg-violet/40 blur-3xl"></div>
+        <div aria-hidden="true" class="absolute -bottom-24 -left-16 size-56 rounded-full bg-lime/20 blur-3xl"></div>
+        <div class="relative">
+          <div class="grid size-20 place-items-center rounded-2xl bg-lime font-display text-3xl font-extrabold text-ink">BV</div>
+          <dl class="mt-8 space-y-5">
+            <div><dt class="font-mono text-xs uppercase tracking-widest text-mute">Based in</dt><dd class="mt-1 text-lg font-semibold">{SITE.location}</dd></div>
+            <div><dt class="font-mono text-xs uppercase tracking-widest text-mute">Currently</dt><dd class="mt-1 text-lg font-semibold">{SITE.experience[0].role}<br /><span class="font-normal text-paper/70">{SITE.experience[0].org}</span></dd></div>
+            <div><dt class="font-mono text-xs uppercase tracking-widest text-mute">Focus</dt><dd class="mt-1 text-lg font-semibold">ERP, analytics &amp; AI automation</dd></div>
+            {SITE.available && <div><dt class="font-mono text-xs uppercase tracking-widest text-mute">Status</dt><dd class="mt-1 inline-flex items-center gap-2 text-lg font-semibold text-lime"><span class="size-2 rounded-full bg-lime"></span>Open to opportunities</dd></div>}
+          </dl>
+        </div>
+      </div>
+    </aside>
     <div>
       <h1 class="font-display text-[clamp(3.5rem,10vw,7rem)] font-extrabold leading-none tracking-[-0.04em]">Hi, I'm {SITE.name.split(' ')[0]}<span class="text-lime">.</span></h1>
       <div class="mt-8 space-y-5 text-lg leading-relaxed text-paper/85">
@@ -16,6 +28,17 @@ import { SITE } from '../site';
         <p>Before that I led a 5-person team migrating 10+ business clients onto Infor M3, and ran outbound fulfillment at Amazon. There I drove $145K+ in savings through Lean Six Sigma work, with 99% accuracy across 17,000+ orders a day. I like problems where messy real-world operations meet systems that need to be reliable. Recent wins include turning a six-figure annual freight loss net-positive and cutting recurring support tickets by 25%.</p>
         <p>I'm a Business Analytics &amp; Information Systems grad from FIU. I'm looking for roles and freelance work that combine systems thinking with hands-on building: ERP and integration work, automation, and putting LLMs into real business workflows.</p>
       </div>
+      <h2 class="mt-14 font-mono text-sm uppercase tracking-widest text-mute">Experience</h2>
+      <ol class="mt-6 border-l border-line">
+        {SITE.experience.map((e, i) => (
+          <li class="relative pb-8 pl-8 last:pb-0">
+            <span class:list={['absolute -left-[5px] top-2 size-[9px] rounded-full', i === 0 ? 'bg-lime' : 'bg-line']}></span>
+            <p class="font-mono text-xs text-mute">{e.when}</p>
+            <p class="mt-1 font-display text-xl font-extrabold">{e.role}</p>
+            <p class="text-paper/70">{e.org}</p>
+          </li>
+        ))}
+      </ol>
       <h2 class="mt-14 font-mono text-sm uppercase tracking-widest text-mute">Toolbox</h2>
       <ul class="mt-4 flex flex-wrap gap-2">
         {SITE.skills.map(s => <li class="rounded-full border border-line bg-ink-2 px-4 py-2 font-mono text-sm">{s}</li>)}

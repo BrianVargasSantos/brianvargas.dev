@@ -15,7 +15,7 @@ const blog = defineCollection({
 
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/projects' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     summary: z.string(),
     year: z.number(),
@@ -24,6 +24,8 @@ const projects = defineCollection({
     order: z.number().default(99),
     // Gradient pair for the card art; any CSS colors.
     colors: z.tuple([z.string(), z.string()]),
+    // Screenshot shown on the card; path relative to the .md file.
+    cover: image().optional(),
     repo: z.string().url().optional(),
     live: z.string().url().optional(),
   }),
