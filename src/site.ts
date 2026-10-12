@@ -1,11 +1,11 @@
 // Single source of truth for personal details. Edit here, not in pages.
 export const SITE = {
-  url: 'https://example.com', // TODO: your domain
+  url: 'https://brianvargas.dev',
   name: 'Brian Vargas',
   role: 'Software Engineer',
   tagline: 'I build AI-powered tools and the systems that run them.',
   location: 'TODO: City, State',
-  email: 'hello@example.com', // TODO: contact address
+  email: 'hello@brianvargas.dev', // TODO: confirm this inbox exists (see README)
   available: true, // toggles the "open for work" badge
   socials: [
     { label: 'GitHub', href: 'https://github.com/BrianVargasSantos' },

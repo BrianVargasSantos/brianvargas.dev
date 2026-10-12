@@ -6,7 +6,7 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com', // TODO: your domain (also update src/site.ts)
+  site: 'https://brianvargas.dev',
   vite: { plugins: [tailwindcss()] },
   integrations: [sitemap(), mdx()],
 });

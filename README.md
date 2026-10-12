@@ -1,43 +1,36 @@
-# Astro Starter Kit: Minimal
+# brianvargas.dev
+
+Personal site — portfolio, freelance services, and blog. Astro + Tailwind, static, no client framework.
+
+## Develop
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # outputs to dist/
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Editing content
 
-## 🚀 Project Structure
+| What | Where |
+|---|---|
+| Name, tagline, email, socials, skills, services | `src/site.ts` |
+| Projects | `src/content/projects/*.md` |
+| Blog posts | `src/content/blog/*.md` (set `draft: true` to hide in prod) |
+| About page bio | `src/pages/about.astro` |
+| Résumé | `public/resume.pdf` |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Deploy (Cloudflare Pages)
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+1. Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git → pick this repo.
+2. Framework preset **Astro**; build command `npm run build`; output directory `dist`.
+3. Set env var `NODE_VERSION=22`.
+4. Custom domains → add `brianvargas.dev` (and `www.brianvargas.dev`, redirecting to apex).
+   If the domain's DNS is on Cloudflare this is automatic; otherwise point the
+   registrar's nameservers at Cloudflare or add the CNAME it shows you.
+5. Every push to `main` redeploys.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Email
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The site links to `hello@brianvargas.dev`. To receive it for free, enable
+**Cloudflare Email Routing** on the domain and forward it to your personal inbox.
