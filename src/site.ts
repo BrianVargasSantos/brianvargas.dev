@@ -9,7 +9,7 @@ export const SITE = {
   available: true, // toggles the "open for work" badge
   socials: [
     { label: 'GitHub', href: 'https://github.com/BrianVargasSantos' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/TODO' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/brianvargassantos/' },
   ],
   skills: ['TypeScript', 'Angular', 'Node.js', 'Python', 'LLM agents', 'CLI tooling', 'Automation', 'APIs'],
   services: [
