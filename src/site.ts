@@ -4,7 +4,7 @@ export const SITE = {
   name: 'Brian Vargas',
   role: 'Software Engineer',
   tagline: 'I build AI-powered tools and the systems that run them.',
-  location: 'TODO: City, State',
+  location: 'Miami, FL',
   email: 'hello@brianvargas.dev', // TODO: confirm this inbox exists (see README)
   available: true, // toggles the "open for work" badge
   socials: [
