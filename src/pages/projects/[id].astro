@@ -1,0 +1,33 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getProjects } from '../../lib';
+
+export async function getStaticPaths() {
+  return (await getProjects()).map(p => ({ params: { id: p.id }, props: { project: p } }));
+}
+const { project } = Astro.props;
+const { title, summary, stack, colors, year, repo, live } = project.data;
+const { Content } = await render(project);
+---
+<Base title={title} description={summary}>
+  <header class="relative overflow-hidden border-b border-line" style={`--c1:${colors[0]};--c2:${colors[1]}`}>
+    <div aria-hidden="true" class="absolute inset-0 bg-[radial-gradient(80%_120%_at_100%_0%,var(--c1),transparent_60%),radial-gradient(60%_100%_at_0%_100%,var(--c2),transparent_55%)] opacity-60"></div>
+    <div class="relative mx-auto max-w-4xl px-4 py-20 sm:px-6">
+      <a href="/projects" class="font-mono text-sm text-paper/70 hover:text-lime">← All work</a>
+      <h1 class="mt-6 font-display text-[clamp(3rem,9vw,6.5rem)] font-extrabold leading-none tracking-[-0.03em]">{title}</h1>
+      <p class="mt-6 max-w-2xl text-xl text-paper/85">{summary}</p>
+      <dl class="mt-10 flex flex-wrap gap-x-10 gap-y-4 font-mono text-sm">
+        <div><dt class="text-paper/60">Year</dt><dd>{year}</dd></div>
+        <div><dt class="text-paper/60">Stack</dt><dd>{stack.join(' · ')}</dd></div>
+      </dl>
+      <div class="mt-8 flex flex-wrap gap-3">
+        {live && <a href={live} class="rounded-full bg-lime px-5 py-2.5 font-semibold text-ink hover:bg-paper">Visit live ↗</a>}
+        {repo && <a href={repo} class="rounded-full border border-paper/30 px-5 py-2.5 font-semibold hover:border-lime hover:text-lime">Source ↗</a>}
+      </div>
+    </div>
+  </header>
+  <article class="prose prose-invert prose-lg mx-auto max-w-3xl px-4 py-16 sm:px-6 prose-headings:font-display prose-headings:tracking-tight prose-a:text-lime">
+    <Content />
+  </article>
+</Base>

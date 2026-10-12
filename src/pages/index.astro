@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PostRow from '../components/PostRow.astro';
+import { SITE } from '../site';
+import { getPosts, getProjects } from '../lib';
+
+const featured = (await getProjects()).filter(p => p.data.featured).slice(0, 3);
+const posts = (await getPosts()).slice(0, 3);
+const [first, last] = SITE.name.split(' ');
+---
+<Base>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div aria-hidden="true" class="pointer-events-none absolute -right-40 -top-40 size-[36rem] rounded-full bg-violet/30 blur-3xl"></div>
+    <div aria-hidden="true" class="pointer-events-none absolute -bottom-52 -left-32 size-[30rem] rounded-full bg-lime/15 blur-3xl"></div>
+    <div class="relative mx-auto max-w-6xl px-4 pb-20 pt-16 sm:px-6 sm:pt-24">
+      {SITE.available && (
+        <p class="inline-flex items-center gap-2 rounded-full border border-line bg-ink-2 px-3 py-1 font-mono text-xs text-paper/80">
+          <span class="relative flex size-2"><span class="absolute inline-flex size-full animate-ping rounded-full bg-lime opacity-75"></span><span class="relative inline-flex size-2 rounded-full bg-lime"></span></span>
+          Open to full-time roles &amp; freelance projects
+        </p>
+      )}
+      <h1 class="mt-8 font-display text-[clamp(3.5rem,13vw,10rem)] font-extrabold leading-[0.85] tracking-[-0.04em]">
+        {first}<br /><span class="bg-gradient-to-r from-lime via-paper to-violet bg-clip-text text-transparent">{last}</span><span class="text-coral">.</span>
+      </h1>
+      <div class="mt-10 grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-end">
+        <p class="max-w-2xl text-xl leading-relaxed text-paper/85 sm:text-2xl">
+          <span class="font-semibold text-paper">{SITE.role}.</span> {SITE.tagline}
+        </p>
+        <div class="flex flex-wrap gap-3 md:justify-end">
+          <a href="/projects" class="rounded-full bg-lime px-6 py-3 font-semibold text-ink transition hover:bg-paper">See my work</a>
+          <a href="#contact" class="rounded-full border border-paper/30 px-6 py-3 font-semibold transition hover:border-lime hover:text-lime">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills marquee -->
+  <div class="overflow-hidden border-y border-line bg-lime py-4 text-ink" aria-label="Skills">
+    <ul class="flex w-max animate-marquee gap-10 whitespace-nowrap font-display text-2xl font-extrabold uppercase tracking-tight">
+      {[...SITE.skills, ...SITE.skills].map((s, i) => <li aria-hidden={i >= SITE.skills.length ? 'true' : undefined}>{s} <span class="ml-10">✦</span></li>)}
+    </ul>
+  </div>
+
+  <!-- Selected work -->
+  <section class="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+    <div class="mb-10 flex items-end justify-between gap-4">
+      <h2 class="font-display text-5xl font-extrabold tracking-tight sm:text-6xl">Selected work</h2>
+      <a href="/projects" class="shrink-0 font-mono text-sm text-mute hover:text-lime">All projects →</a>
+    </div>
+    <div class="grid gap-5 md:grid-cols-2">
+      {featured.map((p, i) => <ProjectCard project={p} big={i === 0} />)}
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="border-y border-line bg-ink-2">
+    <div class="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+      <p class="font-mono text-sm text-lime">// for clients</p>
+      <h2 class="mt-3 max-w-3xl font-display text-5xl font-extrabold tracking-tight sm:text-6xl">What I can build for you</h2>
+      <ol class="mt-12 grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-3">
+        {SITE.services.map((s, i) => (
+          <li class="bg-ink p-8 transition hover:bg-ink-2">
+            <span class="font-mono text-sm text-coral">0{i + 1}</span>
+            <h3 class="mt-6 font-display text-2xl font-extrabold">{s.title}</h3>
+            <p class="mt-3 text-paper/70">{s.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Writing -->
+  {posts.length > 0 && (
+    <section class="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+      <div class="mb-6 flex items-end justify-between gap-4">
+        <h2 class="font-display text-5xl font-extrabold tracking-tight sm:text-6xl">Writing</h2>
+        <a href="/blog" class="shrink-0 font-mono text-sm text-mute hover:text-lime">All posts →</a>
+      </div>
+      <ul>{posts.map(p => <PostRow post={p} />)}</ul>
+    </section>
+  )}
+
+  <!-- Contact -->
+  <section id="contact" class="scroll-mt-20 px-4 pb-24 sm:px-6">
+    <div class="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] bg-violet px-6 py-16 text-center sm:px-12 sm:py-24">
+      <div aria-hidden="true" class="absolute -right-24 -top-24 size-80 rounded-full bg-coral/60 blur-3xl"></div>
+      <div aria-hidden="true" class="absolute -bottom-24 -left-24 size-80 rounded-full bg-lime/40 blur-3xl"></div>
+      <div class="relative">
+        <h2 class="font-display text-[clamp(2.75rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-tight">Let's build<br />something.</h2>
+        <p class="mx-auto mt-6 max-w-xl text-lg text-paper/90">Hiring, or have a project in mind? I usually reply within a day.</p>
+        <a href={`mailto:${SITE.email}`} class="mt-10 inline-block break-all rounded-full bg-ink px-8 py-4 font-display text-xl font-extrabold transition hover:bg-lime hover:text-ink sm:text-2xl">{SITE.email}</a>
+      </div>
+    </div>
+  </section>
+</Base>

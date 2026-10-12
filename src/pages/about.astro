@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site';
+---
+<Base title="About">
+  <section class="mx-auto grid max-w-6xl gap-14 px-4 py-20 sm:px-6 md:grid-cols-[1fr_1.4fr]">
+    <div>
+      <!-- TODO: replace with your photo: put it in src/assets and use <Image /> from astro:assets -->
+      <div class="aspect-[4/5] rounded-3xl border border-line bg-[radial-gradient(100%_80%_at_100%_0%,var(--color-violet),transparent_60%),radial-gradient(100%_80%_at_0%_100%,var(--color-lime),transparent_60%)] opacity-80"></div>
+    </div>
+    <div>
+      <h1 class="font-display text-[clamp(3.5rem,10vw,7rem)] font-extrabold leading-none tracking-[-0.04em]">Hi, I'm {SITE.name.split(' ')[0]}<span class="text-lime">.</span></h1>
+      <div class="mt-8 space-y-5 text-lg leading-relaxed text-paper/85">
+        <p>TODO: Two or three sentences on who you are and what you're best at.</p>
+        <p>TODO: What you've worked on — roles, notable wins, the kind of problems you like.</p>
+        <p>TODO: What you're looking for next — the role you want, or the clients you help.</p>
+      </div>
+      <h2 class="mt-14 font-mono text-sm uppercase tracking-widest text-mute">Toolbox</h2>
+      <ul class="mt-4 flex flex-wrap gap-2">
+        {SITE.skills.map(s => <li class="rounded-full border border-line bg-ink-2 px-4 py-2 font-mono text-sm">{s}</li>)}
+      </ul>
+      <div class="mt-12 flex flex-wrap gap-3">
+        <a href="/resume.pdf" class="rounded-full bg-lime px-6 py-3 font-semibold text-ink hover:bg-paper">Download résumé ↓</a>
+        <a href="/#contact" class="rounded-full border border-paper/30 px-6 py-3 font-semibold hover:border-lime hover:text-lime">Get in touch</a>
+      </div>
+    </div>
+  </section>
+</Base>

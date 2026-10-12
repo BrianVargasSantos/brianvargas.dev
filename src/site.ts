@@ -1,0 +1,20 @@
+// Single source of truth for personal details. Edit here, not in pages.
+export const SITE = {
+  url: 'https://example.com', // TODO: your domain
+  name: 'Brian Vargas',
+  role: 'Software Engineer',
+  tagline: 'I build AI-powered tools and the systems that run them.',
+  location: 'TODO: City, State',
+  email: 'hello@example.com', // TODO: contact address
+  available: true, // toggles the "open for work" badge
+  socials: [
+    { label: 'GitHub', href: 'https://github.com/BrianVargasSantos' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/TODO' },
+  ],
+  skills: ['TypeScript', 'Angular', 'Node.js', 'Python', 'LLM agents', 'CLI tooling', 'Automation', 'APIs'],
+  services: [
+    { title: 'AI integrations', body: 'Wire LLMs into real products — agents, tool use, evals, and guardrails that hold up in production.' },
+    { title: 'Web apps & dashboards', body: 'Fast, accessible front-ends and the APIs behind them, from prototype to launch.' },
+    { title: 'Automation & tooling', body: 'CLIs, pipelines, and internal tools that remove the busywork from your team.' },
+  ],
+};

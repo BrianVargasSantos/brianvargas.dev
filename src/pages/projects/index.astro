@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getProjects } from '../../lib';
+const projects = await getProjects();
+---
+<Base title="Work" description="Projects I've designed and built.">
+  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <h1 class="font-display text-[clamp(3.5rem,10vw,8rem)] font-extrabold leading-none tracking-[-0.04em]">Work<span class="text-lime">.</span></h1>
+    <p class="mt-6 max-w-2xl text-xl text-paper/80">Things I've designed, built, and shipped.</p>
+    <div class="mt-14 grid gap-5 md:grid-cols-2">
+      {projects.map((p, i) => <ProjectCard project={p} big={i === 0} />)}
+    </div>
+  </section>
+</Base>
